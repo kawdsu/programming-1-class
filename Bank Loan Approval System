@@ -1,0 +1,78 @@
+using System;
+
+class test1 
+{
+    static void Main() 
+    {
+        Console.Write("Enter Applicant Name: ");
+        string applicantName = Console.ReadLine();
+        Console.Write("Enter Credit Score: ");
+        int creditScore = int.Parse(Console.ReadLine());
+        Console.Write("Has Recent Bankrupcy? (true/false): ");
+        string recentBankrupcy = Console.ReadLine();
+        Console.Write("Enter Requested Loan Amount: ");
+        int loanAmount = int.Parse(Console.ReadLine());
+        
+        bool isDenied = false;
+        int interestRateWhole = 0;
+        double interestRate = 0;
+        double totalInterest = 0;
+        double amountToRepay = 0;
+        
+        
+        if (recentBankrupcy == "true")
+        {
+            Console.WriteLine("Loan Denied: Applicant has a recent bankruptcy.");
+            isDenied = true;
+        }
+        
+        else if (creditScore < 600)
+        {
+            Console.WriteLine("Loan Denied: Credit score below minimum threshold.");
+            isDenied = true;
+        }
+        
+        else 
+        {
+            if (loanAmount > 500000 && creditScore >= 600 && creditScore < 700)
+            {
+                Console.WriteLine("Loan Denied: High-value loans require a credit score of 700 or above.");
+                isDenied = true;
+            }
+            
+            else 
+            {
+                if (creditScore >= 800 && creditScore <= 850)
+                {
+                    interestRateWhole = 3;
+                    interestRate = 0.03;
+                }
+                else if (creditScore >= 700 && creditScore <= 799)
+                {
+                    interestRateWhole = 5;
+                    interestRate = 0.05;
+                }
+                else if (creditScore >= 600 && creditScore <= 699)
+                {
+                    interestRateWhole = 8;
+                    interestRate = 0.08;
+                }
+                
+                totalInterest = loanAmount * interestRate;
+                amountToRepay = loanAmount + totalInterest;
+                
+                if (isDenied == false)
+                {
+                
+                Console.WriteLine($"\nApplicant: {applicantName}");
+                Console.WriteLine($"Requested Loan Amount: P{loanAmount}");
+                Console.WriteLine($"Interest Rate: {interestRateWhole}%");
+                Console.WriteLine($"Total Interest: P{totalInterest}");
+                Console.WriteLine($"Total to Repay: P{amountToRepay}");
+                    
+                }
+            }
+        }
+      
+    }
+}
