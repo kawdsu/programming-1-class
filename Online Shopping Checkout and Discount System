@@ -1,0 +1,75 @@
+using System;
+
+class test1 {
+    static void Main() {
+        
+        Console.Write("Enter Customer Name: ");
+        string cName = Console.ReadLine();
+        Console.Write("Enter Total Purchase Amount: ");
+        int totalPurchaseAmount = int.Parse(Console.ReadLine());
+        Console.Write("Are you a member? (true/false): ");
+        string memberStatus = Console.ReadLine();
+        Console.Write("Enter Number of Items Purchased: ");
+        int numberItemsPurchased = int.Parse(Console.ReadLine());
+        
+        Console.Write("\nPayment Method\n1 - Cash\n2 - Credit Card\n3 - E-Wallet\n");
+        Console.Write("Choose Payment Method: ");
+        int paymentMethod = int.Parse(Console.ReadLine());
+        
+        string customerClassification = "Regular Customer";
+        double discountPrice = 0;
+        double amountAfterDiscount = 0;
+        double serviceCharge = 0;
+        double additionalDiscount = 0;
+        double finalAmount = 0;
+        
+        if (totalPurchaseAmount >= 10000 && memberStatus == "true" && numberItemsPurchased >= 5)
+        {
+            customerClassification = "Premium Member";
+            discountPrice = totalPurchaseAmount * 0.15;
+            amountAfterDiscount = totalPurchaseAmount - discountPrice;
+        }
+        
+        else if (totalPurchaseAmount >= 5000 && memberStatus == "true")
+        {
+            customerClassification = "Regular Member";
+            discountPrice = totalPurchaseAmount * 0.10;
+            amountAfterDiscount = totalPurchaseAmount - discountPrice;
+        }
+        
+        else if (totalPurchaseAmount >= 3000 && numberItemsPurchased >= 10)
+        {
+            customerClassification = "Bulk Buyer";
+            discountPrice = totalPurchaseAmount * 0.05;
+            amountAfterDiscount = totalPurchaseAmount - discountPrice;
+        }
+        
+        else 
+        {
+            amountAfterDiscount = totalPurchaseAmount;
+        }
+        
+        if (paymentMethod == 2)
+        {
+            serviceCharge = amountAfterDiscount * 0.03;
+        }
+        
+        else if (paymentMethod == 3 && amountAfterDiscount >= 2000)
+        {
+            additionalDiscount = amountAfterDiscount * .02;
+        }
+        
+        finalAmount = amountAfterDiscount + serviceCharge - additionalDiscount;
+        
+        Console.WriteLine($"\nCustomer Classification: {customerClassification}");
+        Console.WriteLine("\n--- CHECKOUT SUMMARY ---");
+        Console.WriteLine($"Customer: {cName}");
+        Console.WriteLine($"Original Amount: P{totalPurchaseAmount}");
+        Console.WriteLine($"Discount: P{discountPrice}");
+        Console.WriteLine($"Amount After Discount: P{amountAfterDiscount}");
+        Console.WriteLine($"Service Charge: P{serviceCharge}");
+        Console.WriteLine($"Additional Discount: P{additionalDiscount}");
+        Console.WriteLine($"Final Amount: P{finalAmount}");
+            
+    }
+}
