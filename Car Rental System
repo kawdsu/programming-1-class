@@ -1,0 +1,130 @@
+using System;
+
+class carRentalSystem 
+{
+    static void Main() 
+    {
+        Console.Write("Enter Customer Name: ");
+        string cName = Console.ReadLine();
+        Console.Write("Enter Daily Rental Rate: ");
+        int dailyRentalRate = int.Parse(Console.ReadLine());
+        Console.Write("Enter Number of Days: ");
+        int numberOfDays = int.Parse(Console.ReadLine());
+        Console.Write("Are you a loyalty member? (true/false): ");
+        string memberStatus = Console.ReadLine();
+        
+        Console.Write("\nInsurance Plan\n1 - Basic\n2 - Premium\n3 - Full Coverage");
+        Console.Write("\nChoose Insurance Plan: ");
+        int insurancePlan = int.Parse(Console.ReadLine());
+        
+        double totalRentalAmount = dailyRentalRate * numberOfDays;
+        double discountPrice = 0;
+        double amountAfterDiscount = 0;
+        double insuranceFee = 0;
+        double cashBack = 0;
+        double finalAmount = 0;
+        
+        if (totalRentalAmount >= 15000 && memberStatus == "true" && numberOfDays >= 10)
+        {
+            Console.WriteLine("\nCustomer Classficiation: Platinum Tier");
+            discountPrice = totalRentalAmount * .20;
+            amountAfterDiscount = totalRentalAmount - discountPrice;
+            if (insurancePlan == 2)
+            {
+                insuranceFee = amountAfterDiscount * .05;
+            }
+            else if (insurancePlan == 3)
+            {
+                insuranceFee = amountAfterDiscount * .08;
+                if (amountAfterDiscount >= 10000)
+                {
+                    cashBack = 500;
+                }
+                else 
+                {
+                    cashBack = 0;
+                }
+            }
+            finalAmount = (amountAfterDiscount + insuranceFee) - cashBack;
+        }
+        
+        else if (totalRentalAmount >= 8000 && memberStatus == "true")
+        {
+            Console.WriteLine("\nCustomer Classficiation: Gold Tier");
+            discountPrice = totalRentalAmount * .15;
+            amountAfterDiscount = totalRentalAmount - discountPrice;
+            if (insurancePlan == 2)
+            {
+                insuranceFee = amountAfterDiscount * .05;
+            }
+            else if (insurancePlan == 3)
+            {
+                insuranceFee = amountAfterDiscount * .08;
+                if (amountAfterDiscount >= 10000)
+                {
+                    cashBack = 500;
+                }
+                else 
+                {
+                    cashBack = 0;
+                }
+            }
+            finalAmount = (amountAfterDiscount + insuranceFee) - cashBack;
+        }
+        
+        else if (totalRentalAmount >= 5000 && numberOfDays >= 7 )
+        {
+            Console.WriteLine("\nCustomer Classficiation: Long Drive Promo");
+            discountPrice = totalRentalAmount * .10;
+            amountAfterDiscount = totalRentalAmount - discountPrice;
+            if (insurancePlan == 2)
+            {
+                insuranceFee = amountAfterDiscount * .05;
+            }
+            else if (insurancePlan == 3)
+            {
+                insuranceFee = amountAfterDiscount * .08;
+                if (amountAfterDiscount >= 10000)
+                {
+                    cashBack = 500;
+                }
+                else 
+                {
+                    cashBack = 0;
+                }
+            }
+            finalAmount = (amountAfterDiscount + insuranceFee) - cashBack;
+        }
+        
+         else
+        {
+            Console.WriteLine("\nCustomer Classficiation: Regular Renter");
+            amountAfterDiscount = totalRentalAmount;
+            if (insurancePlan == 2)
+            {
+                insuranceFee = totalRentalAmount * .05;
+            }
+            else if (insurancePlan == 3)
+            {
+                insuranceFee = totalRentalAmount * .08;
+                if (amountAfterDiscount >= 10000)
+                {
+                    cashBack = 500;
+                }
+                else 
+                {
+                    cashBack = 0;
+                }
+            }
+            finalAmount = (amountAfterDiscount + insuranceFee) - cashBack;
+        }
+        
+        Console.WriteLine("\n--- RENTAL SUMMARY ---");
+        Console.WriteLine($"Original Rental Amount: {totalRentalAmount}");
+        Console.WriteLine($"Discount: {discountPrice}");
+        Console.WriteLine($"Amount after discount: {amountAfterDiscount}");
+        Console.WriteLine($"Insurance Fee: {insuranceFee}");
+        Console.WriteLine($"Cashback: {cashBack}");
+        Console.WriteLine($"Final Amount: {finalAmount}");
+    }
+}
