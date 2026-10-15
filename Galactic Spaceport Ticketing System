@@ -1,0 +1,85 @@
+using System;
+
+class test1 
+{
+    static void Main() 
+    {
+        Console.Write("Enter Passenger Name: ");
+        string passengerName = Console.ReadLine();
+        Console.Write("Enter Destination Code (1/2/3): ");
+        int destinationCode = int.Parse(Console.ReadLine());
+        Console.Write("Enter Ticket Class: ");
+        string ticketClass = Console.ReadLine();
+        Console.Write("Enter Luggage Weight: ");
+        int luggageWeight = Convert.ToInt32(Console.ReadLine());
+      
+        double basePrice = 0;
+        double basePriceAfter = 0;
+        string destinationName = "";
+        double baggageFee = 0;
+        bool isValid = true;
+        
+        switch (destinationCode)
+        {
+            case (1):
+                destinationName = "Mars";
+                basePrice = 3000;
+            break;
+            case (2):
+                destinationName = "Venus";
+                basePrice = 4500;
+            break;
+            case (3):
+                destinationName = "Jupiter";
+                basePrice = 8000;
+            break;
+            default:
+                Console.WriteLine("\nError: Invalid Destination Code");
+                isValid = false;
+            break;
+        }
+        
+        if (isValid == true)
+        {
+            if (ticketClass == "Economy")
+            {
+                basePriceAfter = basePrice * 1;
+                if (luggageWeight > 20)
+                {
+                    Console.WriteLine("Error: Economy class cannot exceed 20kg.");
+                    isValid = false;
+                }
+            }
+            else if (ticketClass == "Business")
+            {
+                basePriceAfter = basePrice *1.5;
+                if (luggageWeight > 40)
+                {
+                    baggageFee = 500;
+                }
+            }
+            else if (ticketClass == "First")
+            {
+                basePriceAfter = basePrice * 2;
+            }
+            else 
+            {
+                Console.WriteLine("Error: Invalid ticket class.");
+                isValid = false;
+                
+            }
+            
+            if (isValid == true)
+            {
+            double finalPrice = basePriceAfter + baggageFee;
+            
+            Console.WriteLine("--- BOARDING PASS ---");
+            Console.WriteLine($"Passanger: {passengerName}");
+            Console.WriteLine($"Desitnation: {destinationName}");
+            Console.WriteLine($"Base Price P{basePrice}");
+            Console.WriteLine($"Baggage Fee = P{baggageFee}");
+            Console.WriteLine($"Final Ticket Price = P{finalPrice}");
+            }
+        }             
+    }
+}
