@@ -1,0 +1,104 @@
+using System;
+
+class test1 
+{
+    static void Main() 
+    {
+        Console.Write("Enter Character Name: ");
+        string characterName = Console.ReadLine();
+        Console.Write("Choose Class (1-Knight, 2-Rogue, 3-Sorcerer): ");
+        int classCode = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Choose Action (attack/sneak/cast): ");
+        string actionString = Console.ReadLine().ToLower();
+        Console.Write("Do you possess the Sun Amulet? (true/false): ");
+        string sunAmulet = Console.ReadLine().ToLower();
+        
+        bool isValid = true;
+        string className = null;
+        string actionStatement = null;
+        
+        switch (classCode)
+        {
+            case 1:
+            className = "Knight";
+            break;
+            
+            case 2:
+            className = "Rogue";
+            break;
+            
+            case 3:
+            className = "Sorcerer";
+            break;
+            
+            default:
+            Console.Write("System Error: Invalid class.");
+            isValid = false;
+            break;
+        }
+        
+        if (isValid == true)
+        {
+            if (classCode == 1)
+            {
+                if (actionString == "attack")
+                {
+                    if (sunAmulet == "true")
+                    {
+                        actionStatement = "Your amulet glows with solar energy! Your heavy strike shatters the Golem's armor. You enter the vault!";
+                    }
+                    
+                    else if (sunAmulet == "false")
+                    {
+                        actionStatement = "Your normal steel bounces harmlessly off the Golem. It wakes up and crushes you. GAME OVER.";
+                    }
+                }
+                
+                else
+                {
+                    actionStatement = "The heavy armor of a Knight makes you too slow for that. The Golem wakes up. GAME OVER.";
+                }
+            }
+            
+            else if (classCode == 2)
+            {
+                if (actionString == "sneak")
+                {
+                    actionStatement = "You perfectly blend into the shadows, slipping right between the Golem's legs. You enter the vault!";
+                }
+                
+                else
+                {
+                    actionStatement = "You stepped on a loose rock. The Golem wakes up and catches you. GAME OVER.";
+                }
+            }
+            
+            else if (classCode == 3)
+            {
+                if (actionString == "cast")
+                {
+                    if (sunAmulet == "true")
+                    {
+                        actionStatement = "You channel the amulet's power to cast a blinding beam of light, turning the Golem to glass! You enter the vault!";
+                    }
+                    
+                    else if (sunAmulet == "false")
+                    {
+                        actionStatement = "Your basic spells are too weak to pierce stone. The Golem wakes up. GAME OVER.";
+                    }
+                    
+                else 
+                    {
+                        actionStatement = "You fumble your spellbook. The Golem wakes up. GAME OVER.";
+                    }
+                }
+            }
+            
+            Console.WriteLine("\n--- THE OBSIDIAN VAULT ---");
+            Console.WriteLine($"{characterName} the {className} approaches...");
+            Console.WriteLine($"{actionStatement}");
+        }
+        
+        
+    }
+}
